@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/EasyImagy"]
+	path = Carthage/Checkouts/EasyImagy
+	url = https://github.com/koher/EasyImagy.git
