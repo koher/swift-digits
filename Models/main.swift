@@ -20,17 +20,14 @@ class SkLearn{
         let  path = "/Users/\(NSUserName())/miniconda3/envs/swiftpython/lib/python2.7/site-packages/"
         sys.path.append(path)
         
-        let load_digits = Python.import("sklearn.datasets").load_digits
-        let LinearSVC = Python.import("sklearn.svm").LinearSVC
-        let train_test_split = Python.import("sklearn.model_selection").train_test_split
+        let dataset = Python.import("sklearn.datasets").load_digits()
+        let classifier = Python.import("sklearn.svm").LinearSVC()
+        let (xTrain, xTest, yTrain, yTest) = Python.import("sklearn.model_selection").train_test_split(dataset["data"], dataset["target"]).tuple4
+
+        classifier.fit(xTrain, yTrain)
+        print("train: \(classifier.score(xTrain, yTrain))")
+        print("test:  \(classifier.score(xTest, yTest))")
         
-        let classifier = LinearSVC()
-        let dataset = load_digits()
-        let (X_train, X_test, y_train, y_test) = train_test_split(dataset["data"], dataset["target"]).tuple4
-        classifier.fit(X_train, y_train)
-        
-        print("train: \(classifier.score(X_train, y_train))")
-        print("test:  \(classifier.score(X_test, y_test))")
     }
 }
 
